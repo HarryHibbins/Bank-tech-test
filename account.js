@@ -11,8 +11,9 @@ class account {
   Deposit = (amount) => {
     this.AmountValidation(amount)
 
-    this.balance += amount;
     const date = this.formatDate(new Date)
+    this.balance += amount;
+
     const deposit = {amount: amount, date: date, balance: this.balance, type: "DEPOSIT"}
     this.transactions.push(deposit)
     return deposit
@@ -31,17 +32,37 @@ class account {
 
   }
 
-  GetTransactions(){
+  PrintStatement = () => {
+    const transactions = this.GetTransactions();
+    console.log("date || credit || debit || balance || type");
+    for (let i = 0; i < transactions.length; i++) {
+      const element = transactions[i];
+      if (element.type == "DEPOSIT"){
+        console.log(`${element.date} || || ${element.amount} || ${element.balance} || ${element.type}`);
+      }
+      else{
+        console.log(`${element.date} || ${element.amount} || || ${element.balance} || ${element.type}`);
+
+      }
+    }
+
+  }
+  GetTransactions = () => {
     return this.transactions;
   }
-  
-
-
 
   AmountValidation = (amount) => {
     if (amount <= 0){
       throw new Error('Number must be greater than 0')
     }
+    const amount_string = amount.toString()
+    if (amount_string.includes(".")){
+      const array = amount_string.split(".")
+      if (array[1].length > 2){
+        throw new Error('Maximum of 2 decimal places')
+      }
+    }
+
   }
 
   formatDate = (date) => {
