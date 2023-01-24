@@ -7,12 +7,17 @@ To install jest:
 
 ## How To Use
 1. Run `node` in a terminal 
-2. Require account file with: `const Account = require('./account')`
+2. Require account, deposit, and withdraw class with:
+```JS
+const Account = require('./account')
+const Deposit = require('./deposit')
+const Withdraw = require('./withdraw')
+```
 3. Create an instance of account: `account = new Account()`
 4. Use the following functions to interact with the program
 ```JS
-account.Deposit(amount)
-account.Withdraw(amount)
+account.Deposit(new Deposit(amount))
+account.Withdraw(new Withdraw(amount))
 account.PrintSatement()
 ``` 
 

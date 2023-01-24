@@ -1,3 +1,4 @@
+Deposit = require('./deposit')
 class account {
   constructor(){
     this.balance = 0;
@@ -8,45 +9,39 @@ class account {
     return this.balance;
   }
 
-  Deposit = (amount) => {
-    this.AmountValidation(amount)
-    const date = this.formatDate(new Date)
-
-    this.balance += amount;
-
-    const deposit = {amount: amount, date: date, balance: this.GetBalance(), type: "DEPOSIT"}
+  Deposit = (deposit) => {
+    this.balance += deposit.GetAmount();
     this.transactions.push(deposit)
-    return deposit
+    deposit.SetNewBalance(this.GetBalance())
+    return deposit;
 
   }
-  Withdraw = (amount) => {
-    this.AmountValidation(amount)
 
-    if (amount > this.GetBalance()){
+  Withdraw = (withdraw) => {
+    if (withdraw.GetAmount() > this.GetBalance()){
       throw new Error('Insufficient funds')
     }
-    const date = this.formatDate(new Date)
-    this.balance -= amount;
-    const withdraw = {amount: amount, date: date, balance: this.GetBalance(), type: "WITHDRAW"};
+    this.balance -= withdraw.GetAmount();
     this.transactions.push(withdraw)
+    withdraw.SetNewBalance(this.GetBalance())
     return withdraw;
 
   }
-
   PrintStatement = () => {
     const transactions = this.GetTransactions();
     console.log("date || credit || debit || balance || type");
     for (let i = 0; i < transactions.length; i++) {
       const element = transactions[i];
-      if (element.type == "DEPOSIT"){
-        console.log(`${element.date} || || ${element.amount.toFixed(2)} || ${element.balance.toFixed(2)} || ${element.type}`);
+      if (element.GetType() == "DEPOSIT"){
+        console.log(`${element.GetDate()} || || ${element.GetAmount().toFixed(2)} || ${element.GetNewBalance().toFixed(2)} || ${element.GetType()}`);
       }
       else{
-        console.log(`${element.date} || ${element.amount.toFixed(2)} || || ${element.balance.toFixed(2)} || ${element.type}`);
+        console.log(`${element.GetDate()} || ${element.GetAmount().toFixed(2)} || || ${element.GetNewBalance().toFixed(2)} || ${element.GetType()}`);
 
       }
     }
 
+ 
   }
   GetTransactions = () => {
     return this.transactions;
@@ -65,17 +60,6 @@ class account {
     }
   }
 
-  formatDate = (date) => {
-    const day = date.getDate()
-    let month = date.getMonth() +1
-    const year = date.getFullYear()
-    if (month < 10){
-      month = "0"+month
-    }
-
-    const date_ = `${day}/${month}/${year}`;
-    return date_;
-  }
 }
 
 module.exports = account
