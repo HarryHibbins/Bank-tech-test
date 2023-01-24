@@ -137,8 +137,8 @@ describe(Account, () => {
     expect(logSpy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledTimes(3);
     expect(logSpy).toHaveBeenCalledWith("date || credit || debit || balance || type");
-    expect(logSpy).toHaveBeenCalledWith(`${date} || || 1000 || 1000 || DEPOSIT`);
-    expect(logSpy).toHaveBeenCalledWith(`${date} || 300 || || 700 || WITHDRAW`);
+    expect(logSpy).toHaveBeenCalledWith(`${date} || || 1000.00 || 1000.00 || DEPOSIT`);
+    expect(logSpy).toHaveBeenCalledWith(`${date} || 300.00 || || 700.00 || WITHDRAW`);
 
   })
   it("Deposit amount has a maximum of 2 decimal places", () => {

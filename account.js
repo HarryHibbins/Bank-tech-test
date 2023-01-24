@@ -10,23 +10,24 @@ class account {
 
   Deposit = (amount) => {
     this.AmountValidation(amount)
-
     const date = this.formatDate(new Date)
+
     this.balance += amount;
 
-    const deposit = {amount: amount, date: date, balance: this.balance, type: "DEPOSIT"}
+    const deposit = {amount: amount, date: date, balance: this.GetBalance(), type: "DEPOSIT"}
     this.transactions.push(deposit)
     return deposit
 
   }
   Withdraw = (amount) => {
     this.AmountValidation(amount)
+
     if (amount > this.GetBalance()){
       throw new Error('Insufficient funds')
     }
     const date = this.formatDate(new Date)
     this.balance -= amount;
-    const withdraw = {amount: amount, date: date, balance: this.balance, type: "WITHDRAW"};
+    const withdraw = {amount: amount, date: date, balance: this.GetBalance(), type: "WITHDRAW"};
     this.transactions.push(withdraw)
     return withdraw;
 
@@ -38,10 +39,10 @@ class account {
     for (let i = 0; i < transactions.length; i++) {
       const element = transactions[i];
       if (element.type == "DEPOSIT"){
-        console.log(`${element.date} || || ${element.amount} || ${element.balance} || ${element.type}`);
+        console.log(`${element.date} || || ${element.amount.toFixed(2)} || ${element.balance.toFixed(2)} || ${element.type}`);
       }
       else{
-        console.log(`${element.date} || ${element.amount} || || ${element.balance} || ${element.type}`);
+        console.log(`${element.date} || ${element.amount.toFixed(2)} || || ${element.balance.toFixed(2)} || ${element.type}`);
 
       }
     }
@@ -62,7 +63,6 @@ class account {
         throw new Error('Maximum of 2 decimal places')
       }
     }
-
   }
 
   formatDate = (date) => {
