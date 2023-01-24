@@ -15,8 +15,6 @@ describe(Withdraw, () => {
     const withdraw = new Withdraw(1000, '01/01/2023');
     expect(withdraw.GetDate()).toBe('01/01/2023')
   })
-  xit("Throws an error if an invalid date is entered", () => {
-  })
   it("Only a number greater than 0 can be withdrawn", () => {
     
     expect(() => {new Withdraw(-1000)}).toThrow(Error)
