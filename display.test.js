@@ -4,18 +4,18 @@ describe(Display, () => {
   it("Display shows a deposit", () => {
 
     const mockedDeposit = {
-      GetAmount: () => {
+      getAmount: () => {
         return 1000
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 1000
       },
-      GetType: () => {
+      getType: () => {
         return 'DEPOSIT'
       }
     }
@@ -27,7 +27,7 @@ describe(Display, () => {
       Deposit: () => {
         return mockedDeposit
       },
-      GetTransactions: () => {
+      getTransactions: () => {
         return [mockedDeposit]
       }
     }
@@ -49,35 +49,35 @@ describe(Display, () => {
   it("Display shows deposits and withdrawals", () => {
 
     const mockedDeposit = {
-      GetAmount: () => {
+      getAmount: () => {
         return 1000
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 1000
       },
-      GetType: () => {
+      getType: () => {
         return 'DEPOSIT'
       }
     }
 
     const mockedWithdraw = {
-      GetAmount: () => {
+      getAmount: () => {
         return 250
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 750
       },
-      GetType: () => {
+      getType: () => {
         return 'WITHDRAW'
       }
     }
@@ -91,7 +91,7 @@ describe(Display, () => {
       Withdraw: () => {
         return mockedWithdraw
       },
-      GetTransactions: () => {
+      getTransactions: () => {
         return [mockedDeposit, mockedWithdraw]
       }
     }

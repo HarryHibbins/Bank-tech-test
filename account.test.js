@@ -18,103 +18,103 @@ describe(Account, () => {
   it("Has a balance", () => {
     const account = new Account;
     
-    expect(account.GetBalance()).toBe(0)
+    expect(account.getBalance()).toBe(0)
   })
   it("Balance can be increased by depositing", () => {
     const account = new Account;
     
     const mockedDeposit = {
-      GetAmount: () => {
+      getAmount: () => {
         return 1000
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 1000;
       }
     }
     account.Deposit(mockedDeposit);
 
-    expect(account.GetBalance()).toBe(1000)
+    expect(account.getBalance()).toBe(1000)
   })
   it("Balance can be decreased by withdrawing", () => {
     const account = new Account();
 
     const mockedDeposit = {
-      GetAmount: () => {
+      getAmount: () => {
         return 1000
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 1000;
       }
     }
 
     const mockedWithdraw = {
-      GetAmount: () => {
+      getAmount: () => {
         return 500
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 500;
       }
     }
     
     account.Deposit(mockedDeposit)
     account.Withdraw(mockedWithdraw)
-    expect(account.GetBalance()).toBe(500)
+    expect(account.getBalance()).toBe(500)
   })
   it("Amount must be greater than balance to be withdrawn", () => {
     const account = new Account;
 
     const mockedWithdraw = {
-      GetAmount: () => {
+      getAmount: () => {
         return 500
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       }
     }
     
     expect(() => {account.Withdraw(mockedWithdraw)}).toThrow(Error)
     expect(() => {account.Withdraw(mockedWithdraw)}).toThrow("Insufficient funds")
     
-    expect(account.GetBalance()).toBe(0)
+    expect(account.getBalance()).toBe(0)
   })
   it("Adds deposits to a list of transactions", () => {
     const account = new Account;
 
     const mockedDeposit = {
-      GetAmount: () => {
+      getAmount: () => {
         return 1000
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
       GetType: () => {
         return 'DEPOSIT';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       }
     }
     account.Deposit(mockedDeposit)
 
-    expect(account.GetTransactions()).toEqual([mockedDeposit])
-    expect(account.GetTransactions()[0].GetAmount()).toBe(1000)
-    expect(account.GetTransactions()[0].GetType()).toBe("DEPOSIT")
+    expect(account.getTransactions()).toEqual([mockedDeposit])
+    expect(account.getTransactions()[0].getAmount()).toBe(1000)
+    expect(account.getTransactions()[0].GetType()).toBe("DEPOSIT")
 
   })
   it("Adds deposits and withdrawals to a list of transactions", () => {
@@ -122,29 +122,29 @@ describe(Account, () => {
 
 
     const mockedDeposit = {
-      GetAmount: () => {
+      getAmount: () => {
         return 1000
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 1000;
       }
     }
 
     const mockedWithdraw = {
-      GetAmount: () => {
+      getAmount: () => {
         return 250
       },
-      GetDate: () => {
+      getDate: () => {
         return '01/01/2023';
       },
-      SetNewBalance: () => {
+      setNewBalance: () => {
       },
-      GetNewBalance: () => {
+      getNewBalance: () => {
         return 750
       },
       GetType: () => {
@@ -154,11 +154,11 @@ describe(Account, () => {
     account.Deposit(mockedDeposit)
     account.Withdraw(mockedWithdraw)
 
-    expect(account.GetTransactions()).toEqual([mockedDeposit, mockedWithdraw])
-    expect(account.GetTransactions()[1].GetAmount()).toBe(250)
-    expect(account.GetTransactions()[1].GetNewBalance()).toBe(750)
-    expect(account.GetTransactions()[1].GetDate()).toBe('01/01/2023')
-    expect(account.GetTransactions()[1].GetType()).toBe("WITHDRAW")
+    expect(account.getTransactions()).toEqual([mockedDeposit, mockedWithdraw])
+    expect(account.getTransactions()[1].getAmount()).toBe(250)
+    expect(account.getTransactions()[1].getNewBalance()).toBe(750)
+    expect(account.getTransactions()[1].getDate()).toBe('01/01/2023')
+    expect(account.getTransactions()[1].GetType()).toBe("WITHDRAW")
 
   })
 })

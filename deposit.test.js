@@ -3,16 +3,16 @@ describe(Deposit, () => {
   it("Has an amount", () => {
     const deposit = new Deposit(1000);
     
-    expect(deposit.GetAmount()).toBe(1000)
+    expect(deposit.getAmount()).toBe(1000)
   })
   it("Has a default date", () => {
     const deposit = new Deposit(1000);
     const date = (new Date).toLocaleDateString()
-    expect(deposit.GetDate()).toBe(date)
+    expect(deposit.getDate()).toBe(date)
   })
   it("Has an entered date", () => {
     const deposit = new Deposit(1000, '01/01/2023');
-    expect(deposit.GetDate()).toBe('01/01/2023')
+    expect(deposit.getDate()).toBe('01/01/2023')
   })
   it("Only a number greater than 0 can be deposited", () => {
     

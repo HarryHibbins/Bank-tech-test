@@ -3,10 +3,10 @@ class Account {
     this.transactions = []
   }
 
-  GetBalance = () => {
-    if (this.GetTransactions().length >= 1){
-      const lastElement = this.GetTransactions().at(-1);
-      return lastElement.GetNewBalance();
+  getBalance = () => {
+    if (this.getTransactions().length >= 1){
+      const lastElement = this.getTransactions().at(-1);
+      return lastElement.getNewBalance();
     }
     else{
       return 0;
@@ -14,25 +14,25 @@ class Account {
   }
 
   Deposit = (deposit) => {
-    const newAmount = this.GetBalance() + deposit.GetAmount();
+    const newAmount = this.getBalance() + deposit.getAmount();
     this.transactions.push(deposit)
-    deposit.SetNewBalance(newAmount)
+    deposit.setNewBalance(newAmount)
     return deposit;
 
   }
 
   Withdraw = (withdraw) => {
-    if (withdraw.GetAmount() > this.GetBalance()){
+    if (withdraw.getAmount() > this.getBalance()){
       throw new Error('Insufficient funds')
     }
-    const newAmount = this.GetBalance() - withdraw.GetAmount();
+    const newAmount = this.getBalance() - withdraw.getAmount();
     this.transactions.push(withdraw)
-    withdraw.SetNewBalance(newAmount)
+    withdraw.setNewBalance(newAmount)
     return withdraw;
 
   }
 
-  GetTransactions = () => {
+  getTransactions = () => {
     return this.transactions;
   }
 }

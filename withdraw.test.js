@@ -4,16 +4,16 @@ describe(Withdraw, () => {
   it("Has an amount", () => {
     const withdraw = new Withdraw(1000);
     
-    expect(withdraw.GetAmount()).toBe(1000)
+    expect(withdraw.getAmount()).toBe(1000)
   })
   it("Has a default date", () => {
     const withdraw = new Withdraw(1000);
     const date = (new Date).toLocaleDateString()
-    expect(withdraw.GetDate()).toBe(date)
+    expect(withdraw.getDate()).toBe(date)
   })
   it("Has an entered date", () => {
     const withdraw = new Withdraw(1000, '01/01/2023');
-    expect(withdraw.GetDate()).toBe('01/01/2023')
+    expect(withdraw.getDate()).toBe('01/01/2023')
   })
   it("Only a number greater than 0 can be withdrawn", () => {
     

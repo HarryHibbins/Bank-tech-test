@@ -9,8 +9,8 @@ describe("Integration", () => {
 
     account.Deposit(deposit);
     
-    expect(deposit.GetNewBalance()).toBe(1000)
-    expect(account.GetBalance()).toBe(1000)
+    expect(deposit.getNewBalance()).toBe(1000)
+    expect(account.getBalance()).toBe(1000)
   })
   it("Account is updated after a withdrawal", () => {
     const account = new Account();
@@ -19,9 +19,9 @@ describe("Integration", () => {
 
     account.Deposit(deposit);
     account.Withdraw(withdraw);
-    expect(deposit.GetNewBalance()).toBe(1000)
-    expect(withdraw.GetNewBalance()).toBe(500)
-    expect(account.GetBalance()).toBe(500)
+    expect(deposit.getNewBalance()).toBe(1000)
+    expect(withdraw.getNewBalance()).toBe(500)
+    expect(account.getBalance()).toBe(500)
   })
   it("Each deposit and transaction are added to a list of transactions", () => {
     const account = new Account();
@@ -30,12 +30,12 @@ describe("Integration", () => {
 
     account.Deposit(deposit);
     account.Withdraw(withdraw);
-    expect(deposit.GetNewBalance()).toBe(1000)
-    expect(withdraw.GetNewBalance()).toBe(500)
-    expect(account.GetBalance()).toBe(500)
-    expect(account.GetTransactions()).toBe [deposit, withdraw]
-    expect(account.GetTransactions()[0].GetNewBalance()).toBe (1000)
-    expect(account.GetTransactions()[1].GetNewBalance()).toBe (500)
+    expect(deposit.getNewBalance()).toBe(1000)
+    expect(withdraw.getNewBalance()).toBe(500)
+    expect(account.getBalance()).toBe(500)
+    expect(account.getTransactions()).toBe [deposit, withdraw]
+    expect(account.getTransactions()[0].getNewBalance()).toBe (1000)
+    expect(account.getTransactions()[1].getNewBalance()).toBe (500)
   }),
   it("Prints a statement of all transactions to the console", () => {
     const account = new Account;

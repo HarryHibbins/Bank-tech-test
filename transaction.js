@@ -1,33 +1,33 @@
 class Transaction{
   constructor(amount, date, type){
-    this.AmountValidation(amount)
+    this.amountValidation(amount)
     this.amount = amount;
     this.type = type;
     this.date = date;
     this.newBalance = 0;
   }
 
-  GetAmount(){
+  getAmount(){
     return this.amount;
   }
 
-  GetDate(){
+  getDate(){
     return this.date;
   }
 
-  SetNewBalance(balance){
+  setNewBalance(balance){
     this.newBalance = balance;
   }
 
-  GetNewBalance(){
+  getNewBalance(){
     return this.newBalance;
   }
 
-  GetType(){
+  getType(){
     return this.type;
   }
 
-  AmountValidation = (amount) => {
+  amountValidation = (amount) => {
     if (amount <= 0){
       throw new Error('Number must be greater than 0')
     }

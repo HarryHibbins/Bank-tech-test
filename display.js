@@ -5,7 +5,7 @@ class Display{
   }
 
   printStatement = () => {
-    const transactions = this.account.GetTransactions();
+    const transactions = this.account.getTransactions();
     console.log("date || credit || debit || balance");
     for (let i = 0; i < transactions.length; i++) {
       const element = transactions[i];
@@ -14,11 +14,11 @@ class Display{
   };
 
   printRow = (element) => {
-    if (element.GetType() == "DEPOSIT") {
-      console.log(`${element.GetDate()} || || ${element.GetAmount().toFixed(2)} || ${element.GetNewBalance().toFixed(2)}`);
+    if (element.getType() == "DEPOSIT") {
+      console.log(`${element.getDate()} || || ${element.getAmount().toFixed(2)} || ${element.getNewBalance().toFixed(2)}`);
     }
     else {
-      console.log(`${element.GetDate()} || ${element.GetAmount().toFixed(2)} || || ${element.GetNewBalance().toFixed(2)}`);
+      console.log(`${element.getDate()} || ${element.getAmount().toFixed(2)} || || ${element.getNewBalance().toFixed(2)}`);
     }
   }
 }
