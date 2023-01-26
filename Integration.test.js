@@ -1,6 +1,7 @@
 const Account = require('./account')
 const Deposit = require('./deposit')
 const Withdraw = require('./withdraw')
+const Display = require('./display')
 describe("Integration", () => {
   it("Account is updated after a deposit", () => {
     const account = new Account();
@@ -44,14 +45,16 @@ describe("Integration", () => {
 
     const logSpy = jest.spyOn(global.console, 'log');
 
-    account.PrintStatement();
+
+    const display = new Display(account);
+    display.printStatement(); 
     const date = (new Date()).toLocaleDateString()
 
     expect(logSpy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledTimes(3);
-    expect(logSpy).toHaveBeenCalledWith("date || credit || debit || balance || type");
-    expect(logSpy).toHaveBeenCalledWith(`${date} || || 1000.00 || 1000.00 || DEPOSIT`);
-    expect(logSpy).toHaveBeenCalledWith(`${date} || 250.00 || || 750.00 || WITHDRAW`);
+    expect(logSpy).toHaveBeenCalledWith("date || credit || debit || balance");
+    expect(logSpy).toHaveBeenCalledWith(`${date} || || 1000.00 || 1000.00`);
+    expect(logSpy).toHaveBeenCalledWith(`${date} || 250.00 || || 750.00`);
 
   })
 })

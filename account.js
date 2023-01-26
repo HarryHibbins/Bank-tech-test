@@ -1,18 +1,22 @@
-Deposit = require('./deposit')
-class account {
+class Account {
   constructor(){
-    this.balance = 0;
     this.transactions = []
   }
 
   GetBalance = () => {
-    return this.balance;
+    if (this.GetTransactions().length >= 1){
+      const lastElement = this.GetTransactions().at(-1);
+      return lastElement.GetNewBalance();
+    }
+    else{
+      return 0;
+    }
   }
 
   Deposit = (deposit) => {
-    this.balance += deposit.GetAmount();
+    const newAmount = this.GetBalance() + deposit.GetAmount();
     this.transactions.push(deposit)
-    deposit.SetNewBalance(this.GetBalance())
+    deposit.SetNewBalance(newAmount)
     return deposit;
 
   }
@@ -21,31 +25,16 @@ class account {
     if (withdraw.GetAmount() > this.GetBalance()){
       throw new Error('Insufficient funds')
     }
-    this.balance -= withdraw.GetAmount();
+    const newAmount = this.GetBalance() - withdraw.GetAmount();
     this.transactions.push(withdraw)
-    withdraw.SetNewBalance(this.GetBalance())
+    withdraw.SetNewBalance(newAmount)
     return withdraw;
 
   }
-  PrintStatement = () => {
-    const transactions = this.GetTransactions();
-    console.log("date || credit || debit || balance || type");
-    for (let i = 0; i < transactions.length; i++) {
-      const element = transactions[i];
-      if (element.GetType() == "DEPOSIT"){
-        console.log(`${element.GetDate()} || || ${element.GetAmount().toFixed(2)} || ${element.GetNewBalance().toFixed(2)} || ${element.GetType()}`);
-      }
-      else{
-        console.log(`${element.GetDate()} || ${element.GetAmount().toFixed(2)} || || ${element.GetNewBalance().toFixed(2)} || ${element.GetType()}`);
 
-      }
-    }
-
- 
-  }
   GetTransactions = () => {
     return this.transactions;
   }
 }
 
-module.exports = account
+module.exports = Account

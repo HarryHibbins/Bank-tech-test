@@ -31,6 +31,9 @@ describe(Account, () => {
         return '01/01/2023';
       },
       SetNewBalance: () => {
+      },
+      GetNewBalance: () => {
+        return 1000;
       }
     }
     account.Deposit(mockedDeposit);
@@ -48,6 +51,9 @@ describe(Account, () => {
         return '01/01/2023';
       },
       SetNewBalance: () => {
+      },
+      GetNewBalance: () => {
+        return 1000;
       }
     }
 
@@ -59,6 +65,9 @@ describe(Account, () => {
         return '01/01/2023';
       },
       SetNewBalance: () => {
+      },
+      GetNewBalance: () => {
+        return 500;
       }
     }
     
@@ -120,6 +129,9 @@ describe(Account, () => {
         return '01/01/2023';
       },
       SetNewBalance: () => {
+      },
+      GetNewBalance: () => {
+        return 1000;
       }
     }
 
@@ -147,58 +159,6 @@ describe(Account, () => {
     expect(account.GetTransactions()[1].GetNewBalance()).toBe(750)
     expect(account.GetTransactions()[1].GetDate()).toBe('01/01/2023')
     expect(account.GetTransactions()[1].GetType()).toBe("WITHDRAW")
-
-  })
-  it("Prints a statement of all transactions to the console", () => {
-    const account = new Account;
-
-    const mockedDeposit = {
-      GetAmount: () => {
-        return 1000
-      },
-      GetDate: () => {
-        return '01/01/2023';
-      },
-      SetNewBalance: () => {
-      },
-      GetNewBalance: () => {
-        return 1000
-      },
-      GetType: () => {
-        return 'DEPOSIT'
-      }
-    }
-
-    const mockedWithdraw = {
-      GetAmount: () => {
-        return 250
-      },
-      GetDate: () => {
-        return '01/01/2023';
-      },
-      SetNewBalance: () => {
-      },
-      GetNewBalance: () => {
-        return 750
-      },
-      GetType: () => {
-        return 'WITHDRAW'
-      }
-    }
-
-
-    account.Deposit(mockedDeposit)
-    account.Withdraw(mockedWithdraw)
-
-    const logSpy = jest.spyOn(global.console, 'log');
-
-    account.PrintStatement();
-
-    expect(logSpy).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledTimes(3);
-    expect(logSpy).toHaveBeenCalledWith("date || credit || debit || balance || type");
-    expect(logSpy).toHaveBeenCalledWith(`${'01/01/2023'} || || 1000.00 || 1000.00 || DEPOSIT`);
-    expect(logSpy).toHaveBeenCalledWith(`${'01/01/2023'} || 250.00 || || 750.00 || WITHDRAW`);
 
   })
 })
