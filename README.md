@@ -20,8 +20,8 @@ Display = require('./display');
  ```
 4. Use the following functions to interact with the program
 ```JS
-account.Deposit(new Deposit(amount));
-account.Withdraw(new Withdraw(amount));
+account.Deposit(new Transaction(amount));
+account.Withdraw(new Transaction(amount));
 
 ``` 
 
