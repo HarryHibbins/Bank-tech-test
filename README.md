@@ -10,19 +10,18 @@ To install jest:
 2. Require account, deposit, and withdraw class with:
 ```JS
 Account = require('./account');
-Deposit = require('./deposit');
-Withdraw = require('./withdraw');
+Transaction = require('./transaction');
 Display = require('./display');
 ```
-3. Create an instance of account:
+3. Create an instance of account and display:
  ```JS
  const account = new Account()
+ const display = new Display(account);
  ```
 4. Use the following functions to interact with the program
 ```JS
 account.Deposit(new Deposit(amount));
 account.Withdraw(new Withdraw(amount));
-const display = new Display(account);
 
 ``` 
 

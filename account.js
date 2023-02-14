@@ -1,3 +1,5 @@
+Transaction = require('./transaction')
+
 class Account {
   constructor(){
     this.transactions = []
@@ -13,22 +15,28 @@ class Account {
     }
   }
 
-  Deposit = (deposit) => {
-    const newAmount = this.getBalance() + deposit.getAmount();
-    this.transactions.push(deposit)
-    deposit.setNewBalance(newAmount)
-    return deposit;
+  Deposit = (transaction) => {
+    if (transaction.getType() != "DEPOSIT"){
+      transaction.setType("DEPOSIT")
+    }
+    const newAmount = this.getBalance() + transaction.getAmount();
+    this.transactions.push(transaction)
+    transaction.setNewBalance(newAmount)
+    return transaction;
 
   }
 
-  Withdraw = (withdraw) => {
-    if (withdraw.getAmount() > this.getBalance()){
+  Withdraw = (transaction) => {
+    if (transaction.getType() != "WITHDRAW"){
+      transaction.setType("WITHDRAW")
+    }
+    if (transaction.getAmount() > this.getBalance()){
       throw new Error('Insufficient funds')
     }
-    const newAmount = this.getBalance() - withdraw.getAmount();
-    this.transactions.push(withdraw)
-    withdraw.setNewBalance(newAmount)
-    return withdraw;
+    const newAmount = this.getBalance() - transaction.getAmount();
+    this.transactions.push(transaction)
+    transaction.setNewBalance(newAmount)
+    return transaction;
 
   }
 

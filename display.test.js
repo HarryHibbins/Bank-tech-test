@@ -3,7 +3,7 @@ const Display = require("./display")
 describe(Display, () => {
   it("Display shows a deposit", () => {
 
-    const mockedDeposit = {
+    const mockedTransaction = {
       getAmount: () => {
         return 1000
       },
@@ -25,17 +25,16 @@ describe(Display, () => {
         return 1000
       },
       Deposit: () => {
-        return mockedDeposit
+        return mockedTransaction
       },
       getTransactions: () => {
-        return [mockedDeposit]
+        return [mockedTransaction]
       }
     }
-    mockedAccount.Deposit(mockedDeposit);
+    mockedAccount.Deposit(mockedTransaction);
 
     
     const logSpy = jest.spyOn(global.console, 'log');
-
 
     const display = new Display(mockedAccount);
     display.printStatement();
@@ -48,7 +47,7 @@ describe(Display, () => {
   })
   it("Display shows deposits and withdrawals", () => {
 
-    const mockedDeposit = {
+    const mockedTransaction = {
       getAmount: () => {
         return 1000
       },
@@ -62,10 +61,12 @@ describe(Display, () => {
       },
       getType: () => {
         return 'DEPOSIT'
+      },
+      setType: () => {
       }
     }
 
-    const mockedWithdraw = {
+    const mockedTransaction1 = {
       getAmount: () => {
         return 250
       },
@@ -79,6 +80,8 @@ describe(Display, () => {
       },
       getType: () => {
         return 'WITHDRAW'
+      },
+      setType: () => {
       }
     }
     const mockedAccount = {
@@ -86,17 +89,17 @@ describe(Display, () => {
         return 1000
       },
       Deposit: () => {
-        return mockedDeposit
+        return mockedTransaction
       },
       Withdraw: () => {
-        return mockedWithdraw
+        return mockedTransaction1
       },
       getTransactions: () => {
-        return [mockedDeposit, mockedWithdraw]
+        return [mockedTransaction, mockedTransaction1]
       }
     }
-    mockedAccount.Deposit(mockedDeposit);
-    mockedAccount.Withdraw(mockedWithdraw);
+    mockedAccount.Deposit(mockedTransaction);
+    mockedAccount.Withdraw(mockedTransaction1);
 
     const logSpy = jest.spyOn(console, 'log');
 

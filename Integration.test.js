@@ -1,47 +1,46 @@
 const Account = require('./account')
-const Deposit = require('./deposit')
-const Withdraw = require('./withdraw')
 const Display = require('./display')
+const Transaction = require('./transaction')
 describe("Integration", () => {
   it("Account is updated after a deposit", () => {
     const account = new Account();
-    const deposit = new Deposit(1000);
+    const transaction = new Transaction(1000);
 
-    account.Deposit(deposit);
+    account.Deposit(transaction);
     
-    expect(deposit.getNewBalance()).toBe(1000)
+    expect(transaction.getNewBalance()).toBe(1000)
     expect(account.getBalance()).toBe(1000)
   })
   it("Account is updated after a withdrawal", () => {
     const account = new Account();
-    const deposit = new Deposit(1000);
-    const withdraw = new Withdraw(500);
+    const d_transaction = new Transaction(1000);
+    const w_transaction = new Transaction(500);
 
-    account.Deposit(deposit);
-    account.Withdraw(withdraw);
-    expect(deposit.getNewBalance()).toBe(1000)
-    expect(withdraw.getNewBalance()).toBe(500)
+    account.Deposit(d_transaction);
+    account.Withdraw(w_transaction);
+    expect(d_transaction.getNewBalance()).toBe(1000)
+    expect(w_transaction.getNewBalance()).toBe(500)
     expect(account.getBalance()).toBe(500)
   })
   it("Each deposit and transaction are added to a list of transactions", () => {
     const account = new Account();
-    const deposit = new Deposit(1000);
-    const withdraw = new Withdraw(500);
+    const d_transaction = new Transaction(1000);
+    const w_transaction = new Transaction(500);
 
-    account.Deposit(deposit);
-    account.Withdraw(withdraw);
-    expect(deposit.getNewBalance()).toBe(1000)
-    expect(withdraw.getNewBalance()).toBe(500)
+    account.Deposit(d_transaction);
+    account.Withdraw(w_transaction);
+    expect(d_transaction.getNewBalance()).toBe(1000)
+    expect(w_transaction.getNewBalance()).toBe(500)
     expect(account.getBalance()).toBe(500)
-    expect(account.getTransactions()).toBe [deposit, withdraw]
+    expect(account.getTransactions()).toBe [d_transaction, w_transaction]
     expect(account.getTransactions()[0].getNewBalance()).toBe (1000)
     expect(account.getTransactions()[1].getNewBalance()).toBe (500)
   }),
   it("Prints a statement of all transactions to the console", () => {
     const account = new Account;
 
-    account.Deposit(new Deposit(1000))
-    account.Withdraw(new Withdraw(250))
+    account.Deposit(new Transaction(1000))
+    account.Withdraw(new Transaction(250))
 
     const logSpy = jest.spyOn(global.console, 'log');
 

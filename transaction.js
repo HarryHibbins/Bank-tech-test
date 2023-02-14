@@ -1,8 +1,7 @@
 class Transaction{
-  constructor(amount, date, type){
+  constructor(amount, date = (new Date).toLocaleDateString()){
     this.amountValidation(amount)
     this.amount = amount;
-    this.type = type;
     this.date = date;
     this.newBalance = 0;
   }
@@ -27,6 +26,9 @@ class Transaction{
     return this.type;
   }
 
+  setType(string){
+    this.type = string.toUpperCase();
+  }
   amountValidation = (amount) => {
     if (amount <= 0){
       throw new Error('Number must be greater than 0')
